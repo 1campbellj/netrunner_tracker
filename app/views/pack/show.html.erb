@@ -1,0 +1,12 @@
+<div class='sidebar'>
+  <strong>
+    <div class='sidebar-item'><%= link_to @pack.cycle.name, cycle_path(@pack.cycle) %> > </div>
+    <div class='sidebar-item'><%= @pack.name %></div>
+  </strong>
+
+  <%= render partial: '/card/card_name_list', locals: { cards: @cards } %>
+</div>
+
+<div class='window'>
+  <%= render partial: '/card/cards', locals: { cards: @cards }%>
+</div>

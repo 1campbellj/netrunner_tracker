@@ -1,9 +1,13 @@
 class CreateCards < ActiveRecord::Migration[5.2]
   def change
     create_table :cards do |t|
+      t.references :packs
+      t.references :boxes
+      t.string :order
       t.string :name
-      t.numeric :pack_id
-
+      t.boolean :owned
+      t.bolean :proxied
+      
       t.timestamps
     end
   end

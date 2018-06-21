@@ -1,1 +1,23 @@
-<div>sup<div>
+<div class='sidebar'>
+  <strong>Cycles</strong>
+  <% @cycles.each do |cycle| %>
+    <div class='sidebar-item'><%= link_to cycle.name, cycle_path(cycle) %></div>
+  <% end %>
+  <br>
+  <strong>Boxes</strong>
+  <% @boxes.each do |box| %>
+    <div class='sidebar-item'><%= link_to box.name, box_path(box) %></div>
+  <% end %>
+</div>
+
+<div class='window'>
+  <div class='search-wrapper'>
+    <%= form_tag '/', id: 'search-form' do %>
+      <%= text_area_tag :card_list, @card_list,
+                        rows: 50, cols: 25, autofocus: true,
+                        onfocus: "var temp_value=this.value; this.value=''; this.value=temp_value" %>
+    <% end %>
+  </div>
+
+  <%= render partial: '/card/cards', locals: { cards: @cards } %>
+</div>

@@ -1,0 +1,83 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @media print {
+   .window {
+     margin-left: 0;
+   }
+   .sidebar, .search-wrapper {
+     display: none;
+   }
+
+  .nr-card {
+    width: 6.0325cm;
+    height: 8.36cm;
+    vertical-align: top;
+    border: 0.075cm solid black;
+    background-color: black;
+  }
+
+  .card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+ }
+
+ @media screen {
+   body {
+     font-family: monospace;
+     text-transform: lowercase;
+     font-size: 16px;
+   
+     background-color: black;
+     color: white;
+   }
+   
+   a {
+     color: white;
+     text-decoration: none;
+   }
+   
+   .nr-card {
+     width: 6.35cm;
+     height: 8.89cm;
+   }
+   
+   .sidebar {
+     width: 250px;
+     height: 100%;
+   
+     position: fixed;
+     overflow-y: scroll;
+   }
+   
+   .window {
+     margin-left: 250px;
+   
+     display: flex;
+   }
+   
+   .sidebar-item {
+     margin-top: 3px;
+   }
+   
+   .search-wrapper {
+     height: 100%;
+   }
+ }
+
+

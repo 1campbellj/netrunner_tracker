@@ -1,0 +1,5 @@
+  <% cards.each do |card| %>
+    <div class='sidebar-item card-link' data-card-id="<%=card.name.gsub(/\s/, '_') %>">
+      <%= card.name %>
+    </div>
+  <% end %>

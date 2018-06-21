@@ -13,4 +13,31 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require lodash
 //= require_tree .
+
+document.addEventListener('turbolinks:load', function () {
+  var cardNames = Array.from(document.getElementsByClassName('card-link'));
+
+  cardNames.forEach(function (card) {
+    card.addEventListener('click', function () {
+      scrollToCard(card.attributes['data-card-id'].value);
+    });
+  });
+
+  searchElement().addEventListener('input', _.debounce(submitSearch, 500));
+
+});
+
+var searchElement = function () {
+  return document.getElementById('search-form');
+}
+
+var submitSearch = function () {
+  console.log('search submit');
+  searchElement().submit();
+}
+
+var scrollToCard = function (cardId) {
+  document.getElementById(cardId).scrollIntoView();
+};

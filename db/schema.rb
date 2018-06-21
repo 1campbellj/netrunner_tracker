@@ -10,19 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_20_024901) do
+ActiveRecord::Schema.define(version: 2018_06_20_054037) do
+
+  create_table "boxes", force: :cascade do |t|
+    t.string "name"
+    t.decimal "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cards", force: :cascade do |t|
     t.string "name"
     t.decimal "pack_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "box_id"
+    t.decimal "order"
   end
 
   create_table "cycles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "order"
   end
 
   create_table "packs", force: :cascade do |t|
@@ -30,6 +40,7 @@ ActiveRecord::Schema.define(version: 2018_06_20_024901) do
     t.decimal "cycle_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "order"
   end
 
 end

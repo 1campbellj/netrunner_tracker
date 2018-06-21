@@ -1,8 +1,7 @@
-class CreatePacks < ActiveRecord::Migration[5.2]
+class CreateBoxes < ActiveRecord::Migration[5.2]
   def change
-    create_table :packs do |t|
+    create_table :boxes do |t|
       t.string :name
-      t.references :cycles
       t.string :order
       t.boolean :owned
       t.boolean :proxied
