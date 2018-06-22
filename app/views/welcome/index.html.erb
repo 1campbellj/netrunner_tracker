@@ -8,6 +8,7 @@
   <% @boxes.each do |box| %>
     <div class='sidebar-item'><%= link_to box.name, box_path(box) %></div>
   <% end %>
+  <%= render partial: '/welcome/stack' %>
 </div>
 
 <div class='window'>

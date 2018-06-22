@@ -10,37 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_20_054037) do
+ActiveRecord::Schema.define(version: 2018_06_20_052015) do
 
   create_table "boxes", force: :cascade do |t|
     t.string "name"
-    t.decimal "order"
+    t.string "order"
+    t.boolean "owned"
+    t.boolean "proxied"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "cards", force: :cascade do |t|
+    t.integer "pack_id"
+    t.integer "box_id"
+    t.string "order"
     t.string "name"
-    t.decimal "pack_id"
+    t.boolean "owned"
+    t.boolean "proxied"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "box_id"
-    t.decimal "order"
+    t.index ["box_id"], name: "index_cards_on_box_id"
+    t.index ["pack_id"], name: "index_cards_on_pack_id"
   end
 
   create_table "cycles", force: :cascade do |t|
     t.string "name"
+    t.string "order"
+    t.boolean "owned"
+    t.boolean "proxied"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "order"
   end
 
   create_table "packs", force: :cascade do |t|
     t.string "name"
-    t.decimal "cycle_id"
+    t.integer "cycle_id"
+    t.string "order"
+    t.boolean "owned"
+    t.boolean "proxied"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "order"
+    t.index ["cycle_id"], name: "index_packs_on_cycle_id"
   end
 
 end

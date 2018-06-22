@@ -1,5 +1,5 @@
-<div class='card-wrapper'>
+<div class='cards-wrapper'>
   <% cards.each do |card| %>
-    <%= image_tag card.filepath, class: "nr-card", id: card.name.gsub(/\s/, '_') %>
+    <%= render partial: '/card/card', locals: { card: card } %>
   <% end %>
 </div>

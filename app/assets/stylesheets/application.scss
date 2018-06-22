@@ -18,8 +18,13 @@
    .window {
      margin-left: 0;
    }
-   .sidebar, .search-wrapper {
+   .sidebar, .search-wrapper, .card-button-wrapper {
      display: none;
+   }
+
+   * { 
+    overflow: auto !important;
+
    }
 
   .nr-card {
@@ -31,11 +36,16 @@
   }
 
   .card-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    float: left;
+
+    * + * {
+      margin-left: 1px;
+    }
   }
+
  }
+
+
 
  @media screen {
    body {
@@ -78,6 +88,65 @@
    .search-wrapper {
      height: 100%;
    }
+
+  .cards-wrapper {
+    // display: flex;
+    // flex-wrap: wrap;
+  }
+
+  .card-wrapper {
+    position: relative;
+    display: inline;
+  }
+
+  .card-button-wrapper {
+    position: absolute;
+    bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .card-button {
+    background-color: gray;
+    border: 1px solid black;
+    border-radius: 3px;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &[active=true] {
+      background-color: darkorchid;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & + & {
+      margin-left: 3px;
+    }
+  }
+
+  .stack-button.card-button {
+    border: 2px solid orchid;
+    & + & {
+      margin: 0;
+    }
+  }
+
+  .stack-buttons-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .card-link:hover {
+    cursor: pointer;
+  }
+
  }
 
 

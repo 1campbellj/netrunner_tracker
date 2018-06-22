@@ -5,9 +5,9 @@ class Card < ApplicationRecord
 
   def filepath
     if box
-      return "#{obj_filename(box, 2)}/#{obj_filename(self, 3)}.jpg"
+      return "#{obj_filename(box)}/#{obj_filename(self)}.jpg"
     else
-      return "#{obj_filename(cycle, 2)}/#{obj_filename(pack, 2)}/#{obj_filename(self, 3)}.jpg"
+      return "#{obj_filename(cycle)}/#{obj_filename(pack)}/#{obj_filename(self)}.jpg"
     end
   end
 
@@ -17,8 +17,7 @@ class Card < ApplicationRecord
 
   private
 
-  def obj_filename(obj, n)
-    ord = obj.order.to_i.to_s.rjust(n, '0')
-    "#{ord} - #{obj.name}"
+  def obj_filename(obj)
+    "#{obj.order} - #{obj.name}"
   end
 end
