@@ -6,6 +6,7 @@ class WelcomeController < ApplicationController
 
   def view_list
     ids = params[:ids].split(',')
+
     @cards = Card.where(id: ids)
   end
 
