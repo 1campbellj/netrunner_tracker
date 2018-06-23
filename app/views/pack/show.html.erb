@@ -3,6 +3,11 @@
     <div class='sidebar-item'><%= link_to @pack.cycle.name, cycle_path(@pack.cycle) %> > </div>
     <div class='sidebar-item'><%= @pack.name %></div>
   </strong>
+  <div class='stack-buttons-wrapper'>
+    <div id='pack-own' data-pack-id='<%= @pack.id%>' class='card-button stack-button'>own</div>
+    <div id='pack-disown' data-pack-id='<%= @pack.id%>' class='card-button stack-button'>disown</div>
+  </div>
+
 
   <%= render partial: '/card/card_name_list', locals: { cards: @cards } %>
 </div>

@@ -1,5 +1,5 @@
 <div class='sidebar'>
-  <strong>Cycles</strong>
+  <strong><%= link_to 'Cycles', cycle_index_path %></strong>
   <% @cycles.each do |cycle| %>
     <div class='sidebar-item'><%= link_to cycle.name, cycle_path(cycle) %></div>
   <% end %>

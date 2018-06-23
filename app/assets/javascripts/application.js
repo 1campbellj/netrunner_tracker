@@ -21,9 +21,53 @@ document.addEventListener('turbolinks:load', function () {
   setupSearchBox();
   setupOwnClicks();
   setupProxyClicks();
-  setupPushClicks()
+  setupStackClicks();
+  setupPackButtons();
+  setupBoxButtons();
   renderStack();
 });
+
+function setupPackButtons() {
+  ownBtn = document.getElementById('pack-own');
+  disownBtn = document.getElementById('pack-disown');
+
+  if (ownBtn) {
+    ownBtn.addEventListener('click', function (event) {
+      var id = event.target.attributes['data-pack-id'].value
+      var url = `/pack/${id}/own_all`
+      fetchAndReload(url);
+    });
+  }
+
+  if (disownBtn) {
+    disownBtn.addEventListener('click', function (event) {
+      var id = event.target.attributes['data-pack-id'].value
+      var url = `/pack/${id}/disown_all`
+      fetchAndReload(url);
+    });
+  }
+}
+
+function setupBoxButtons() {
+  ownBtn = document.getElementById('box-own');
+  disownBtn = document.getElementById('box-disown');
+
+  if (ownBtn) {
+    ownBtn.addEventListener('click', function (event) {
+      var id = event.target.attributes['data-box-id'].value
+      var url = `/box/${id}/own_all`
+      fetchAndReload(url);
+    });
+  }
+
+  if (disownBtn) {
+    disownBtn.addEventListener('click', function (event) {
+      var id = event.target.attributes['data-box-id'].value
+      var url = `/box/${id}/disown_all`
+      fetchAndReload(url);
+    });
+  }
+}
 
 function setupOwnClicks() {
   var buttons = Array.from(document.getElementsByClassName('own-button'));
@@ -138,7 +182,7 @@ function setupCardNameClicks() {
 }
 
 // stack handling
-function setupPushClicks() {
+function setupStackClicks() {
   var buttons = Array.from(document.getElementsByClassName('push-button'));
   buttons.forEach(function (button) {
     button.addEventListener('click', function (event) {
@@ -190,6 +234,21 @@ function setupPushClicks() {
       Turbolinks.visit(url);
     });
   }
+
+  document.addEventListener('click', function (e) {
+    if (e.target && _.indexOf(e.target.classList, 'pop-stack-element') >= 0) {
+      var i = parseInt(e.target.attributes['data-index'].value);
+      popIndex(i);
+    }
+  });
+
+}
+
+function popIndex(i) {
+  var stack = JSON.parse(localStorage.getItem('cardStack'));
+  stack.splice(i, 1);
+  localStorage.setItem('cardStack', JSON.stringify(stack));
+  renderStack();
 }
 
 function stackIds() {
@@ -202,7 +261,7 @@ function stackOp(action) {
   fetchAndReload(url, { card_ids: ids });
 }
 
-function fetchAndReload(url, body) {
+function fetchAndReload(url, body = {}) {
   fetch(url, {
     method: 'POST',
     headers: {
@@ -227,8 +286,11 @@ function fetchAndReload(url, body) {
 
 var stackTemplate = `
     <div class='stack'>
-      <% _(cardList).each(function(card){ %>
-        <div> <%= card.name %> </div>
+      <% _(cardList).each(function(card, i){ %>
+        <div>
+          <span class='pop-stack-element' data-index='<%= i %>'>x</span> 
+          <%= card.name %>
+        </div>
       <% }); %>
     </div>
   `
@@ -250,7 +312,7 @@ function handlePushClick(event) {
   var id = attributes['data-card-id'].value;
 
   var stack = JSON.parse(localStorage.getItem('cardStack')) || [];
-  stack.push({ id: id, name: name });
+  stack.unshift({ id: id, name: name });
   localStorage.setItem('cardStack', JSON.stringify(stack));
   renderStack();
 }

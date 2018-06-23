@@ -1,0 +1,13 @@
+<div class='sidebar'>
+  <strong>
+    <div class='sidebar-item'><%= link_to 'root', '/' %> > </div>
+  </strong>
+  <% @cycles.each do |cycle| %>
+    <br>
+    <strong><div class='sidebar-item'><%= link_to cycle.name, cycle_path(cycle) %></div></strong>
+    <% cycle.packs.each do |pack| %>
+      <div class='sidebar-item'><%= link_to pack.name, pack_path(pack)%></div>
+    <% end %>
+  <% end %>
+<div style="height: 50px;width: 10px;"></div>
+</div>

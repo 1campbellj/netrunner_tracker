@@ -6,8 +6,10 @@ class WelcomeController < ApplicationController
 
   def view_list
     ids = params[:ids].split(',')
-
-    @cards = Card.where(id: ids)
+    @cards = []
+    ids.each do |id|
+      @cards << Card.where(id: id).take
+    end
   end
 
   def search
