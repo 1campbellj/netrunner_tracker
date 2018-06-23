@@ -182,6 +182,14 @@ function setupCardNameClicks() {
 }
 
 // stack handling
+
+function pushMissing() {
+  var cards = document.querySelectorAll('div.card-wrapper[data-owned="false"][data-proxied="false"]');
+  _(cards).each(function (card) {
+    stackPush({ id: card.attributes['data-card-id'].value, name: card.attributes['data-card-name'].value })
+  });
+}
+
 function setupStackClicks() {
   var buttons = Array.from(document.getElementsByClassName('push-button'));
   buttons.forEach(function (button) {
@@ -232,6 +240,13 @@ function setupStackClicks() {
       var url = '/view_list?ids=';
       url += _.join(stackIds(), ',');
       Turbolinks.visit(url);
+    });
+  }
+
+  var stackPushMissingBtn = document.getElementById('stack-missing');
+  if (stackPushMissingBtn) {
+    stackPushMissingBtn.addEventListener('click', function () {
+      pushMissing();
     });
   }
 
@@ -311,8 +326,12 @@ function handlePushClick(event) {
   var name = attributes['data-card-name'].value;
   var id = attributes['data-card-id'].value;
 
+  stackPush({ id: id, name: name });
+}
+
+function stackPush(cardData) {
   var stack = JSON.parse(localStorage.getItem('cardStack')) || [];
-  stack.unshift({ id: id, name: name });
+  stack.unshift({ id: cardData.id, name: cardData.name });
   localStorage.setItem('cardStack', JSON.stringify(stack));
   renderStack();
 }

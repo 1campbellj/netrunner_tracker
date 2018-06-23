@@ -1,4 +1,8 @@
-<div class='card-wrapper'>
+<div class='card-wrapper'
+     data-card-id="<%= card.id %>"
+     data-card-name="<%= card.name %>"
+     data-owned="<%= card.owned %>"
+     data-proxied="<%= card.proxied %>">
   <%= image_tag card.filepath, class: "nr-card", id: card.name.gsub(/\s/, '_') %>
   <div class='card-button-wrapper'>
     <div class='push-button card-button'
